@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -86,7 +87,9 @@
             background: #f1f5f9;
         }
 
-        h1, h2, h3 {
+        h1,
+        h2,
+        h3 {
             margin-top: 0;
         }
 
@@ -201,243 +204,243 @@
 
 <body>
 
-<div class="container">
+    <div class="container">
 
-    <div class="header">
-        <div class="logo">🤖 EduAI</div>
-        <div class="subtitle">Учебный ИИ-помощник</div>
+        <div class="header">
+            <div class="logo">🤖 EduAI</div>
+            <div class="subtitle">Учебный ИИ-помощник</div>
+        </div>
+
+        <div id="app"></div>
+
     </div>
 
-    <div id="app"></div>
+    <script>
 
-</div>
+        var app = document.getElementById("app");
 
-<script>
+        var userName = "";
 
-    var app = document.getElementById("app");
+        var progress = {
+            "Python": 0,
+            "Информатика": 0,
+            "Математика": 0
+        };
 
-    var userName = "";
+        var questions = {
 
-    var progress = {
-        "Python": 0,
-        "Информатика": 0,
-        "Математика": 0
-    };
+            "Python": [
+                {
+                    question: "Что такое Python?",
+                    options: [
+                        "Язык программирования",
+                        "Операционная система",
+                        "Антивирус",
+                        "Игра"
+                    ],
+                    answer: 0,
+                    topic: "Основы Python"
+                },
 
-    var questions = {
+                {
+                    question: "Для чего используется print()?",
+                    options: [
+                        "Для вывода информации",
+                        "Для удаления файла",
+                        "Для запуска компьютера",
+                        "Для создания папки"
+                    ],
+                    answer: 0,
+                    topic: "Команды Python"
+                },
 
-        "Python": [
-            {
-                question: "Что такое Python?",
-                options: [
-                    "Язык программирования",
-                    "Операционная система",
-                    "Антивирус",
-                    "Игра"
-                ],
-                answer: 0,
-                topic: "Основы Python"
-            },
+                {
+                    question: "Для чего используется if?",
+                    options: [
+                        "Для проверки условия",
+                        "Для выключения компьютера",
+                        "Для рисования",
+                        "Для создания изображения"
+                    ],
+                    answer: 0,
+                    topic: "Условия"
+                },
 
-            {
-                question: "Для чего используется print()?",
-                options: [
-                    "Для вывода информации",
-                    "Для удаления файла",
-                    "Для запуска компьютера",
-                    "Для создания папки"
-                ],
-                answer: 0,
-                topic: "Команды Python"
-            },
+                {
+                    question: "Что создаёт [] в Python?",
+                    options: [
+                        "Список",
+                        "Число",
+                        "Файл",
+                        "Компьютер"
+                    ],
+                    answer: 0,
+                    topic: "Списки"
+                },
 
-            {
-                question: "Для чего используется if?",
-                options: [
-                    "Для проверки условия",
-                    "Для выключения компьютера",
-                    "Для рисования",
-                    "Для создания изображения"
-                ],
-                answer: 0,
-                topic: "Условия"
-            },
+                {
+                    question: "Для чего используется input()?",
+                    options: [
+                        "Для получения данных от пользователя",
+                        "Для удаления Python",
+                        "Для выключения экрана",
+                        "Для создания игры автоматически"
+                    ],
+                    answer: 0,
+                    topic: "Ввод данных"
+                }
+            ],
 
-            {
-                question: "Что создаёт [] в Python?",
-                options: [
-                    "Список",
-                    "Число",
-                    "Файл",
-                    "Компьютер"
-                ],
-                answer: 0,
-                topic: "Списки"
-            },
+            "Информатика": [
+                {
+                    question: "Что такое алгоритм?",
+                    options: [
+                        "Последовательность действий для решения задачи",
+                        "Компьютерная мышь",
+                        "Файл",
+                        "Монитор"
+                    ],
+                    answer: 0,
+                    topic: "Алгоритмы"
+                },
 
-            {
-                question: "Для чего используется input()?",
-                options: [
-                    "Для получения данных от пользователя",
-                    "Для удаления Python",
-                    "Для выключения экрана",
-                    "Для создания игры автоматически"
-                ],
-                answer: 0,
-                topic: "Ввод данных"
-            }
-        ],
+                {
+                    question: "Что такое CPU?",
+                    options: [
+                        "Центральный процессор",
+                        "Видеокарта",
+                        "Клавиатура",
+                        "Флешка"
+                    ],
+                    answer: 0,
+                    topic: "Компьютер"
+                },
 
-        "Информатика": [
-            {
-                question: "Что такое алгоритм?",
-                options: [
-                    "Последовательность действий для решения задачи",
-                    "Компьютерная мышь",
-                    "Файл",
-                    "Монитор"
-                ],
-                answer: 0,
-                topic: "Алгоритмы"
-            },
+                {
+                    question: "Что хранит оперативная память?",
+                    options: [
+                        "Временные данные",
+                        "Только фотографии",
+                        "Только музыку",
+                        "Пароли от всех сайтов"
+                    ],
+                    answer: 0,
+                    topic: "Память"
+                },
 
-            {
-                question: "Что такое CPU?",
-                options: [
-                    "Центральный процессор",
-                    "Видеокарта",
-                    "Клавиатура",
-                    "Флешка"
-                ],
-                answer: 0,
-                topic: "Компьютер"
-            },
+                {
+                    question: "Что такое файл?",
+                    options: [
+                        "Область хранения данных",
+                        "Процессор",
+                        "Клавиатура",
+                        "Интернет"
+                    ],
+                    answer: 0,
+                    topic: "Файлы"
+                },
 
-            {
-                question: "Что хранит оперативная память?",
-                options: [
-                    "Временные данные",
-                    "Только фотографии",
-                    "Только музыку",
-                    "Пароли от всех сайтов"
-                ],
-                answer: 0,
-                topic: "Память"
-            },
+                {
+                    question: "Что делает операционная система?",
+                    options: [
+                        "Управляет компьютером и его ресурсами",
+                        "Только показывает видео",
+                        "Только запускает игры",
+                        "Только подключает Wi-Fi"
+                    ],
+                    answer: 0,
+                    topic: "Операционные системы"
+                }
+            ],
 
-            {
-                question: "Что такое файл?",
-                options: [
-                    "Область хранения данных",
-                    "Процессор",
-                    "Клавиатура",
-                    "Интернет"
-                ],
-                answer: 0,
-                topic: "Файлы"
-            },
+            "Математика": [
+                {
+                    question: "Сколько будет 12 × 5?",
+                    options: [
+                        "60",
+                        "50",
+                        "70",
+                        "55"
+                    ],
+                    answer: 0,
+                    topic: "Умножение"
+                },
 
-            {
-                question: "Что делает операционная система?",
-                options: [
-                    "Управляет компьютером и его ресурсами",
-                    "Только показывает видео",
-                    "Только запускает игры",
-                    "Только подключает Wi-Fi"
-                ],
-                answer: 0,
-                topic: "Операционные системы"
-            }
-        ],
+                {
+                    question: "Сколько будет 100 ÷ 4?",
+                    options: [
+                        "25",
+                        "20",
+                        "30",
+                        "40"
+                    ],
+                    answer: 0,
+                    topic: "Деление"
+                },
 
-        "Математика": [
-            {
-                question: "Сколько будет 12 × 5?",
-                options: [
-                    "60",
-                    "50",
-                    "70",
-                    "55"
-                ],
-                answer: 0,
-                topic: "Умножение"
-            },
+                {
+                    question: "Сколько будет 6²?",
+                    options: [
+                        "36",
+                        "12",
+                        "18",
+                        "42"
+                    ],
+                    answer: 0,
+                    topic: "Степени"
+                },
 
-            {
-                question: "Сколько будет 100 ÷ 4?",
-                options: [
-                    "25",
-                    "20",
-                    "30",
-                    "40"
-                ],
-                answer: 0,
-                topic: "Деление"
-            },
+                {
+                    question: "Если x + 7 = 15, чему равен x?",
+                    options: [
+                        "8",
+                        "7",
+                        "9",
+                        "22"
+                    ],
+                    answer: 0,
+                    topic: "Уравнения"
+                },
 
-            {
-                question: "Сколько будет 6²?",
-                options: [
-                    "36",
-                    "12",
-                    "18",
-                    "42"
-                ],
-                answer: 0,
-                topic: "Степени"
-            },
+                {
+                    question: "Чему равен прямой угол?",
+                    options: [
+                        "90°",
+                        "45°",
+                        "180°",
+                        "360°"
+                    ],
+                    answer: 0,
+                    topic: "Геометрия"
+                }
+            ]
+        };
 
-            {
-                question: "Если x + 7 = 15, чему равен x?",
-                options: [
-                    "8",
-                    "7",
-                    "9",
-                    "22"
-                ],
-                answer: 0,
-                topic: "Уравнения"
-            },
+        function saveProgress() {
+            localStorage.setItem("EduAI_progress", JSON.stringify(progress));
+        }
 
-            {
-                question: "Чему равен прямой угол?",
-                options: [
-                    "90°",
-                    "45°",
-                    "180°",
-                    "360°"
-                ],
-                answer: 0,
-                topic: "Геометрия"
-            }
-        ]
-    };
+        function loadProgress() {
 
-    function saveProgress() {
-        localStorage.setItem("EduAI_progress", JSON.stringify(progress));
-    }
+            var saved = localStorage.getItem("EduAI_progress");
 
-    function loadProgress() {
+            if (saved) {
 
-        var saved = localStorage.getItem("EduAI_progress");
-
-        if (saved) {
-
-            try {
-                progress = JSON.parse(saved);
-            } catch (error) {
-                progress = {
-                    "Python": 0,
-                    "Информатика": 0,
-                    "Математика": 0
-                };
+                try {
+                    progress = JSON.parse(saved);
+                } catch (error) {
+                    progress = {
+                        "Python": 0,
+                        "Информатика": 0,
+                        "Математика": 0
+                    };
+                }
             }
         }
-    }
 
-    function showHome() {
+        function showHome() {
 
-        app.innerHTML = `
+            app.innerHTML = `
             <div class="card">
 
                 <div class="welcome">
@@ -475,13 +478,13 @@
                 </div>
             </div>
         `;
-    }
+        }
 
-    function startApp() {
+        function startApp() {
 
-        loadProgress();
+            loadProgress();
 
-        app.innerHTML = `
+            app.innerHTML = `
             <div class="card">
 
                 <h2>🤓 Добро пожаловать!</h2>
@@ -503,27 +506,27 @@
 
             </div>
         `;
-    }
-
-    function saveName() {
-
-        var input = document.getElementById("nameInput");
-
-        if (!input.value.trim()) {
-
-            alert("Пожалуйста, введи имя.");
-
-            return;
         }
 
-        userName = input.value.trim();
+        function saveName() {
 
-        showHome();
-    }
+            var input = document.getElementById("nameInput");
 
-    function learnMode() {
+            if (!input.value.trim()) {
 
-        app.innerHTML = `
+                alert("Пожалуйста, введи имя.");
+
+                return;
+            }
+
+            userName = input.value.trim();
+
+            showHome();
+        }
+
+        function learnMode() {
+
+            app.innerHTML = `
             <div class="card">
 
                 <h2>📚 РЕЖИМ ОБУЧЕНИЯ</h2>
@@ -546,11 +549,11 @@
 
             </div>
         `;
-    }
+        }
 
-    function pythonLesson() {
+        function pythonLesson() {
 
-        app.innerHTML = `
+            app.innerHTML = `
             <div class="card">
 
                 <h2>🐍 Python</h2>
@@ -602,11 +605,11 @@
 
             </div>
         `;
-    }
+        }
 
-    function mathLesson() {
+        function mathLesson() {
 
-        app.innerHTML = `
+            app.innerHTML = `
             <div class="card">
 
                 <h2>📐 Математика</h2>
@@ -663,11 +666,11 @@
 
             </div>
         `;
-    }
+        }
 
-    function informaticsLesson() {
+        function informaticsLesson() {
 
-        app.innerHTML = `
+            app.innerHTML = `
             <div class="card">
 
                 <h2>💻 Информатика</h2>
@@ -720,11 +723,11 @@
 
             </div>
         `;
-    }
+        }
 
-    function chooseTest() {
+        function chooseTest() {
 
-        app.innerHTML = `
+            app.innerHTML = `
             <div class="card">
 
                 <h2>📝 ВЫБОР ТЕСТА</h2>
@@ -747,148 +750,148 @@
 
             </div>
         `;
-    }
-
-    var currentSubject = "";
-    var currentQuestions = [];
-    var currentQuestionIndex = 0;
-    var currentScore = 0;
-
-    function shuffleArray(array) {
-
-        var copy = array.slice();
-
-        for (var i = copy.length - 1; i > 0; i--) {
-
-            var j = Math.floor(Math.random() * (i + 1));
-
-            var temp = copy[i];
-
-            copy[i] = copy[j];
-
-            copy[j] = temp;
         }
 
-        return copy;
-    }
+        var currentSubject = "";
+        var currentQuestions = [];
+        var currentQuestionIndex = 0;
+        var currentScore = 0;
 
-    function startTest(subject) {
+        function shuffleArray(array) {
 
-        currentSubject = subject;
+            var copy = array.slice();
 
-        currentQuestions = shuffleArray(questions[subject]);
+            for (var i = copy.length - 1; i > 0; i--) {
 
-        currentQuestionIndex = 0;
+                var j = Math.floor(Math.random() * (i + 1));
 
-        currentScore = 0;
+                var temp = copy[i];
 
-        showQuestion();
-    }
+                copy[i] = copy[j];
 
-    function showQuestion() {
+                copy[j] = temp;
+            }
 
-        if (currentQuestionIndex >= currentQuestions.length) {
-
-            showTestResult();
-
-            return;
+            return copy;
         }
 
-        var q = currentQuestions[currentQuestionIndex];
+        function startTest(subject) {
 
-        var html = "";
+            currentSubject = subject;
 
-        html += '<div class="card">';
+            currentQuestions = shuffleArray(questions[subject]);
 
-        html += '<h2>📝 Тест: ' + currentSubject + '</h2>';
+            currentQuestionIndex = 0;
 
-        html += '<p class="small">';
+            currentScore = 0;
 
-        html += 'Вопрос ' + (currentQuestionIndex + 1);
+            showQuestion();
+        }
 
-        html += ' из ' + currentQuestions.length;
+        function showQuestion() {
 
-        html += '</p>';
+            if (currentQuestionIndex >= currentQuestions.length) {
 
-        html += '<div class="question">';
+                showTestResult();
 
-        html += q.question;
+                return;
+            }
 
-        html += '</div>';
+            var q = currentQuestions[currentQuestionIndex];
 
-        for (var i = 0; i < q.options.length; i++) {
+            var html = "";
 
-            html += '<button class="button option" onclick="answerQuestion(' + i + ')">';
+            html += '<div class="card">';
 
-            html += (i + 1) + '. ' + q.options[i];
+            html += '<h2>📝 Тест: ' + currentSubject + '</h2>';
+
+            html += '<p class="small">';
+
+            html += 'Вопрос ' + (currentQuestionIndex + 1);
+
+            html += ' из ' + currentQuestions.length;
+
+            html += '</p>';
+
+            html += '<div class="question">';
+
+            html += q.question;
+
+            html += '</div>';
+
+            for (var i = 0; i < q.options.length; i++) {
+
+                html += '<button class="button option" onclick="answerQuestion(' + i + ')">';
+
+                html += (i + 1) + '. ' + q.options[i];
+
+                html += '</button>';
+            }
+
+            html += '<button class="button back" onclick="chooseTest()">';
+
+            html += '⬅️ Выйти из теста';
 
             html += '</button>';
+
+            html += '</div>';
+
+            app.innerHTML = html;
         }
 
-        html += '<button class="button back" onclick="chooseTest()">';
+        function answerQuestion(answer) {
 
-        html += '⬅️ Выйти из теста';
+            var q = currentQuestions[currentQuestionIndex];
 
-        html += '</button>';
+            if (answer === q.answer) {
 
-        html += '</div>';
+                currentScore++;
 
-        app.innerHTML = html;
-    }
+                alert("✅ Правильно!");
 
-    function answerQuestion(answer) {
+            } else {
+                alert(
+                    "❌ Неправильно.\n\nПравильный ответ: " +
+                    q.options[q.answer]
+                );
+            }
 
-        var q = currentQuestions[currentQuestionIndex];
+            currentQuestionIndex++;
 
-        if (answer === q.answer) {
-
-            currentScore++;
-
-            alert("✅ Правильно!");
-
-        } else {
-alert(
-                "❌ Неправильно.\n\nПравильный ответ: " +
-                q.options[q.answer]
-            );
+            showQuestion();
         }
 
-        currentQuestionIndex++;
+        function showTestResult() {
 
-        showQuestion();
-    }
+            var percentage =
+                Math.round(
+                    (currentScore / currentQuestions.length) * 100
+                );
 
-    function showTestResult() {
+            progress[currentSubject] = percentage;
 
-        var percentage =
-            Math.round(
-                (currentScore / currentQuestions.length) * 100
-            );
+            saveProgress();
 
-        progress[currentSubject] = percentage;
+            var message = "";
 
-        saveProgress();
+            if (percentage === 100) {
 
-        var message = "";
+                message = "🏆 Идеальный результат!";
 
-        if (percentage === 100) {
+            } else if (percentage >= 80) {
 
-            message = "🏆 Идеальный результат!";
+                message = "🔥 Отличный результат!";
 
-        } else if (percentage >= 80) {
+            } else if (percentage >= 60) {
 
-            message = "🔥 Отличный результат!";
+                message = "👍 Хороший результат!";
 
-        } else if (percentage >= 60) {
+            } else {
 
-            message = "👍 Хороший результат!";
+                message = "📚 Нужно немного повторить тему.";
+            }
 
-        } else {
-
-            message = "📚 Нужно немного повторить тему.";
-        }
-
-        app.innerHTML = `
+            app.innerHTML = `
             <div class="card">
 
                 <h2>🎉 Тест завершён!</h2>
@@ -922,17 +925,17 @@ alert(
 
             </div>
         `;
-    }
+        }
 
-    function showProgress() {
+        function showProgress() {
 
-        var python = progress["Python"];
+            var python = progress["Python"];
 
-        var informatics = progress["Информатика"];
+            var informatics = progress["Информатика"];
 
-        var math = progress["Математика"];
+            var math = progress["Математика"];
 
-        app.innerHTML = `
+            app.innerHTML = `
             <div class="card">
 
                 <h2>📊 МОЙ ПРОГРЕСС</h2>
@@ -991,37 +994,125 @@ alert(
 
             </div>
         `;
-    }
+        }
 
-    function questionMode() {
+        function questionMode() {
 
-        app.innerHTML = `
-            <div class="card">
+            app.innerHTML = `
+                <div class="card">
 
-                <h2>🤖 Режим вопросов</h2>
+                    <h2>🤖 Спросить EduAI</h2>
 
-                <p class="lesson">
-                    Этот раздел пока находится в разработке.
-                    В будущем здесь можно будет задавать
-                    EduAI вопросы по учебным предметам.
-                </p>
+                    <p class="small">
+                        Задай учебный вопрос по Python,
+                        информатике или математике.
+                    </p>
 
-                <p>
-                    🚀 Скоро здесь появится настоящий
-                    учебный ИИ-помощник!
-                </p>
+                    <textarea
+                        id="questionInput"
+                        placeholder="Например: что такое цикл for в Python?"
+                        style="
+                    width:100%;
+                    min-height:140px;
+                    padding:15px;
+                    border:2px solid #dbe2ea;
+                    border-radius:14px;
+                    font-size:16px;
+                    resize:vertical;
+                    font-family:Arial,sans-serif;
+                    outline:none;
+                "
+                    ></textarea>
 
-                <button class="button back" onclick="showHome()">
-                    ⬅️ Назад
-                </button>
+                    <button
+                        class="button main-button"
+                        onclick="askEduAI()"
+                    >
+                        🚀 Спросить EduAI
+                    </button>
 
-            </div>
-        `;
-    }
+                    <div id="answerBox"></div>
 
-    function exitApp() {
+                    <button
+                        class="button back"
+                        onclick="showHome()"
+                    >
+                        ⬅️ Назад
+                    </button>
 
-        app.innerHTML = `
+                </div>
+                `;
+        }
+
+
+        function askEduAI() {
+
+            var input = document.getElementById("questionInput");
+            var answerBox = document.getElementById("answerBox");
+
+            var question = input.value.trim();
+
+            var q = question.toLowerCase();
+
+            var answer = "";
+
+            if (q.includes("что такое python")) {
+                (q.includes("что такое пайтон"))
+                    (q.includes("что такое Пайтон"))
+                    (q.includes("что такое Python"))
+                answer = "🐍 Python — это язык программирования, который используют для создания программ, сайтов, игр и работы с данными.";
+            }
+            else if (q.includes("что такое цикл for")) {
+                (q.includes("что такое цикл "))
+                answer = "🔄 Цикл for позволяет повторять один и тот же блок кода несколько раз.";
+            }
+            else if (q.includes("что такое переменная")) {
+                answer = "📦 Переменная — это имя, под которым программа хранит некоторое значение.";
+            }
+            else if (q.includes("что такое алгоритм")) {
+                answer = "🧠 Алгоритм — это последовательность действий, которая приводит к решению задачи.";
+            }
+            else if (q.includes("что такое число")) {
+                answer = "🔢 Число — это математический объект, который используется для счёта, измерения и выполнения вычислений.";
+            }
+            else {
+                answer = "🤔 Я пока не знаю ответа на этот вопрос. Попробуй спросить о Python, информатике или математике.";
+            }
+
+            if (!question) {
+                alert("🤓 Сначала напиши вопрос.");
+                input.focus();
+                return;
+            }
+
+            var safeQuestion = question
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+
+            answerBox.innerHTML = `
+                <div class="card">
+
+                    <h3>🤖 EduAI получил вопрос!</h3>
+
+                    <p>Твой вопрос:</p>
+
+                    <p>
+                        <b>${safeQuestion}</b>
+                    </p>
+
+                    <p>
+    ${answer}
+</p>
+                </div>
+                `;
+        }
+
+        function exitApp() {
+
+            app.innerHTML = `
             <div class="card" style="text-align:center;">
 
                 <div class="emoji">👋</div>
@@ -1038,12 +1129,12 @@ alert(
 
             </div>
         `;
-    }
+        }
 
-    startApp();
+        startApp();
 
-</script>
+    </script>
 
 </body>
+
 </html>
-     
