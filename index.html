@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduAI — Учебный ИИ</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #eef4ff, #f8fbff);
+            color: #172033;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 25px 10px;
+        }
+
+        .logo {
+            font-size: 42px;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            color: #64748b;
+            margin-top: 8px;
+            font-size: 17px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 22px;
+            padding: 22px;
+            margin-bottom: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .button {
+            width: 100%;
+            border: none;
+            border-radius: 15px;
+            padding: 16px;
+            margin: 7px 0;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            background: #eef4ff;
+            color: #172033;
+            transition: 0.2s;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            background: #dce9ff;
+        }
+
+        .main-button {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .main-button:hover {
+            background: #2563eb;
+        }
+
+        .danger {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .back {
+            background: #f1f5f9;
+        }
+
+        h1, h2, h3 {
+            margin-top: 0;
+        }
+
+        .lesson {
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        .question {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+
+        .option {
+            text-align: left;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+        }
+
+        .option:hover {
+            border-color: #3b82f6;
+            background: #eff6ff;
+        }
+
+        .correct {
+            background: #dcfce7 !important;
+            border-color: #22c55e !important;
+        }
+
+        .wrong {
+            background: #fee2e2 !important;
+            border-color: #ef4444 !important;
+        }
+
+        .score {
+            text-align: center;
+            font-size: 38px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .progress-box {
+            margin: 15px 0;
+        }
+
+        .progress-title {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        .progress-bg {
+            width: 100%;
+            height: 14px;
+            background: #e2e8f0;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #3b82f6;
+            border-radius: 20px;
+        }
+
+        .input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #dbe2ea;
+            border-radius: 14px;
+            font-size: 17px;
+            outline: none;
+            margin-bottom: 10px;
+        }
+
+        .input:focus {
+            border-color: #3b82f6;
+        }
+
+        .small {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .welcome {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .emoji {
+            font-size: 28px;
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                padding: 12px;
+            }
+
+            .logo {
+                font-size: 34px;
+            }
+
+            .button {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <div class="logo">🤖 EduAI</div>
+        <div class="subtitle">Учебный ИИ-помощник</div>
+    </div>
+
+    <div id="app"></div>
+
+</div>
+
+<script>
+
+    var app = document.getElementById("app");
+
+    var userName = "";
+
+    var progress = {
+        "Python": 0,
+        "Информатика": 0,
+        "Математика": 0
+    };
+
+    var questions = {
+
+        "Python": [
+            {
+                question: "Что такое Python?",
+                options: [
+                    "Язык программирования",
+                    "Операционная система",
+                    "Антивирус",
+                    "Игра"
+                ],
+                answer: 0,
+                topic: "Основы Python"
+            },
+
+            {
+                question: "Для чего используется print()?",
+                options: [
+                    "Для вывода информации",
+                    "Для удаления файла",
+                    "Для запуска компьютера",
+                    "Для создания папки"
+                ],
+                answer: 0,
+                topic: "Команды Python"
+            },
+
+            {
+                question: "Для чего используется if?",
+                options: [
+                    "Для проверки условия",
+                    "Для выключения компьютера",
+                    "Для рисования",
+                    "Для создания изображения"
+                ],
+                answer: 0,
+                topic: "Условия"
+            },
+
+            {
+                question: "Что создаёт [] в Python?",
+                options: [
+                    "Список",
+                    "Число",
+                    "Файл",
+                    "Компьютер"
+                ],
+                answer: 0,
+                topic: "Списки"
+            },
+
+            {
+                question: "Для чего используется input()?",
+                options: [
+                    "Для получения данных от пользователя",
+                    "Для удаления Python",
+                    "Для выключения экрана",
+                    "Для создания игры автоматически"
+                ],
+                answer: 0,
+                topic: "Ввод данных"
+            }
+        ],
+
+        "Информатика": [
+            {
+                question: "Что такое алгоритм?",
+                options: [
+                    "Последовательность действий для решения задачи",
+                    "Компьютерная мышь",
+                    "Файл",
+                    "Монитор"
+                ],
+                answer: 0,
+                topic: "Алгоритмы"
+            },
+
+            {
+                question: "Что такое CPU?",
+                options: [
+                    "Центральный процессор",
+                    "Видеокарта",
+                    "Клавиатура",
+                    "Флешка"
+                ],
+                answer: 0,
+                topic: "Компьютер"
+            },
+
+            {
+                question: "Что хранит оперативная память?",
+                options: [
+                    "Временные данные",
+                    "Только фотографии",
+                    "Только музыку",
+                    "Пароли от всех сайтов"
+                ],
+                answer: 0,
+                topic: "Память"
+            },
+
+            {
+                question: "Что такое файл?",
+                options: [
+                    "Область хранения данных",
+                    "Процессор",
+                    "Клавиатура",
+                    "Интернет"
+                ],
+                answer: 0,
+                topic: "Файлы"
+            },
+
+            {
+                question: "Что делает операционная система?",
+                options: [
+                    "Управляет компьютером и его ресурсами",
+                    "Только показывает видео",
+                    "Только запускает игры",
+                    "Только подключает Wi-Fi"
+                ],
+                answer: 0,
+                topic: "Операционные системы"
+            }
+        ],
+
+        "Математика": [
+            {
+                question: "Сколько будет 12 × 5?",
+                options: [
+                    "60",
+                    "50",
+                    "70",
+                    "55"
+                ],
+                answer: 0,
+                topic: "Умножение"
+            },
+
+            {
+                question: "Сколько будет 100 ÷ 4?",
+                options: [
+                    "25",
+                    "20",
+                    "30",
+                    "40"
+                ],
+                answer: 0,
+                topic: "Деление"
+            },
+
+            {
+                question: "Сколько будет 6²?",
+                options: [
+                    "36",
+                    "12",
+                    "18",
+                    "42"
+                ],
+                answer: 0,
+                topic: "Степени"
+            },
+
+            {
+                question: "Если x + 7 = 15, чему равен x?",
+                options: [
+                    "8",
+                    "7",
+                    "9",
+                    "22"
+                ],
+                answer: 0,
+                topic: "Уравнения"
+            },
+
+            {
+                question: "Чему равен прямой угол?",
+                options: [
+                    "90°",
+                    "45°",
+                    "180°",
+                    "360°"
+                ],
+                answer: 0,
+                topic: "Геометрия"
+            }
+        ]
+    };
+
+    function saveProgress() {
+        localStorage.setItem("EduAI_progress", JSON.stringify(progress));
+    }
+
+    function loadProgress() {
+
+        var saved = localStorage.getItem("EduAI_progress");
+
+        if (saved) {
+
+            try {
+                progress = JSON.parse(saved);
+            } catch (error) {
+                progress = {
+                    "Python": 0,
+                    "Информатика": 0,
+                    "Математика": 0
+                };
+            }
+        }
+    }
+
+    function showHome() {
+
+        app.innerHTML = `
+            <div class="card">
+
+                <div class="welcome">
+                    👋 Привет, <b>${userName}</b>!
+                </div>
+
+                <h2>🤓 Главное меню</h2>
+
+                <button class="button main-button" onclick="learnMode()">
+                    📚 Изучить тему
+                </button>
+
+                <button class="button" onclick="chooseTest()">
+                    📝 Пройти тест
+                </button>
+
+                <button class="button" onclick="questionMode()">
+                    🤖 Задать вопрос
+                </button>
+
+                <button class="button" onclick="showProgress()">
+                    📊 Мой прогресс
+                </button>
+
+                <button class="button danger" onclick="exitApp()">
+                    🚪 Выйти
+                </button>
+
+            </div>
+
+            <div class="card">
+                <div class="small">
+                    EduAI — учебный проект для изучения программирования,
+                    информатики и математики.
+                </div>
+            </div>
+        `;
+    }
+
+    function startApp() {
+
+        loadProgress();
+
+        app.innerHTML = `
+            <div class="card">
+
+                <h2>🤓 Добро пожаловать!</h2>
+
+                <p>
+                    Введи своё имя, чтобы начать обучение.
+                </p>
+
+                <input
+                    class="input"
+                    id="nameInput"
+                    type="text"
+                    placeholder="Твоё имя"
+                >
+
+                <button class="button main-button" onclick="saveName()">
+                    🚀 Начать
+                </button>
+
+            </div>
+        `;
+    }
+
+    function saveName() {
+
+        var input = document.getElementById("nameInput");
+
+        if (!input.value.trim()) {
+
+            alert("Пожалуйста, введи имя.");
+
+            return;
+        }
+
+        userName = input.value.trim();
+
+        showHome();
+    }
+
+    function learnMode() {
+
+        app.innerHTML = `
+            <div class="card">
+
+                <h2>📚 РЕЖИМ ОБУЧЕНИЯ</h2>
+
+                <button class="button" onclick="pythonLesson()">
+                    🐍 Python
+                </button>
+
+                <button class="button" onclick="mathLesson()">
+                    📐 Математика
+                </button>
+
+                <button class="button" onclick="informaticsLesson()">
+                    💻 Информатика
+                </button>
+
+                <button class="button back" onclick="showHome()">
+                    ⬅️ Назад
+                </button>
+
+            </div>
+        `;
+    }
+
+    function pythonLesson() {
+
+        app.innerHTML = `
+            <div class="card">
+
+                <h2>🐍 Python</h2>
+
+                <div class="lesson">
+
+                    <p>
+                        <b>Python</b> — популярный язык программирования.
+                        Он используется для создания приложений,
+                        сайтов, игр, искусственного интеллекта и многого другого.
+                    </p>
+
+                    <h3>📌 Первая команда</h3>
+
+                    <p>
+                        Команда <b>print()</b> выводит информацию на экран.
+                    </p>
+
+                    <p>
+                        Например:
+                    </p>
+
+                    <p>
+                        <b>print("Hello, World!")</b>
+                    </p>
+
+                    <h3>📌 Условия</h3>
+
+                    <p>
+                        Команда <b>if</b> позволяет проверить условие.
+                    </p>
+
+                    <h3>📌 Списки</h3>
+
+                    <p>
+                        Квадратные скобки <b>[]</b> используются
+                        для создания списка.
+                    </p>
+
+                </div>
+
+                <button class="button back" onclick="learnMode()">
+                    ⬅️ К выбору предмета
+                </button>
+
+                <button class="button main-button" onclick="showHome()">
+                    🏠 Главное меню
+                </button>
+
+            </div>
+        `;
+    }
+
+    function mathLesson() {
+
+        app.innerHTML = `
+            <div class="card">
+
+                <h2>📐 Математика</h2>
+
+                <div class="lesson">
+
+                    <h3>✖️ Умножение</h3>
+
+                    <p>
+                        Чтобы умножить два числа,
+                        нужно найти их произведение.
+                    </p>
+
+                    <p>
+                        Например:
+                        <b>12 × 5 = 60</b>
+                    </p>
+
+                    <h3>➗ Деление</h3>
+
+                    <p>
+                        Например:
+                        <b>100 ÷ 4 = 25</b>
+                    </p>
+
+                    <h3>² Степени</h3>
+
+                    <p>
+                        <b>6² = 6 × 6 = 36</b>
+                    </p>
+
+                    <h3>📊 Уравнения</h3>
+
+                    <p>
+                        Если <b>x + 7 = 15</b>,
+                        то <b>x = 8</b>.
+                    </p>
+
+                    <h3>📐 Геометрия</h3>
+
+                    <p>
+                        Прямой угол равен <b>90°</b>.
+                    </p>
+
+                </div>
+
+                <button class="button back" onclick="learnMode()">
+                    ⬅️ К выбору предмета
+                </button>
+
+                <button class="button main-button" onclick="showHome()">
+                    🏠 Главное меню
+                </button>
+
+            </div>
+        `;
+    }
+
+    function informaticsLesson() {
+
+        app.innerHTML = `
+            <div class="card">
+
+                <h2>💻 Информатика</h2>
+
+                <div class="lesson">
+
+                    <h3>⚙️ Алгоритм</h3>
+
+                    <p>
+                        Алгоритм — это последовательность действий,
+                        которая помогает решить задачу.
+                    </p>
+
+                    <h3>🧠 Процессор</h3>
+
+                    <p>
+                        CPU — центральный процессор компьютера.
+                        Он выполняет команды и обрабатывает данные.
+                    </p>
+
+                    <h3>💾 Оперативная память</h3>
+
+                    <p>
+                        RAM хранит данные, которые нужны компьютеру
+                        во время его работы.
+                    </p>
+
+                    <h3>📁 Файлы</h3>
+
+                    <p>
+                        Файл — это область хранения данных.
+                    </p>
+
+                    <h3>🖥️ Операционная система</h3>
+
+                    <p>
+                        Операционная система управляет компьютером
+                        и его ресурсами.
+                    </p>
+
+                </div>
+
+                <button class="button back" onclick="learnMode()">
+                    ⬅️ К выбору предмета
+                </button>
+
+                <button class="button main-button" onclick="showHome()">
+                    🏠 Главное меню
+                </button>
+
+            </div>
+        `;
+    }
+
+    function chooseTest() {
+
+        app.innerHTML = `
+            <div class="card">
+
+                <h2>📝 ВЫБОР ТЕСТА</h2>
+
+                <button class="button" onclick="startTest('Python')">
+                    🐍 Python
+                </button>
+
+                <button class="button" onclick="startTest('Информатика')">
+                    💻 Информатика
+                </button>
+
+                <button class="button" onclick="startTest('Математика')">
+                    📐 Математика
+                </button>
+
+                <button class="button back" onclick="showHome()">
+                    ⬅️ Назад
+                </button>
+
+            </div>
+        `;
+    }
+
+    var currentSubject = "";
+    var currentQuestions = [];
+    var currentQuestionIndex = 0;
+    var currentScore = 0;
+
+    function shuffleArray(array) {
+
+        var copy = array.slice();
+
+        for (var i = copy.length - 1; i > 0; i--) {
+
+            var j = Math.floor(Math.random() * (i + 1));
+
+            var temp = copy[i];
+
+            copy[i] = copy[j];
+
+            copy[j] = temp;
+        }
+
+        return copy;
+    }
+
+    function startTest(subject) {
+
+        currentSubject = subject;
+
+        currentQuestions = shuffleArray(questions[subject]);
+
+        currentQuestionIndex = 0;
+
+        currentScore = 0;
+
+        showQuestion();
+    }
+
+    function showQuestion() {
+
+        if (currentQuestionIndex >= currentQuestions.length) {
+
+            showTestResult();
+
+            return;
+        }
+
+        var q = currentQuestions[currentQuestionIndex];
+
+        var html = "";
+
+        html += '<div class="card">';
+
+        html += '<h2>📝 Тест: ' + currentSubject + '</h2>';
+
+        html += '<p class="small">';
+
+        html += 'Вопрос ' + (currentQuestionIndex + 1);
+
+        html += ' из ' + currentQuestions.length;
+
+        html += '</p>';
+
+        html += '<div class="question">';
+
+        html += q.question;
+
+        html += '</div>';
+
+        for (var i = 0; i < q.options.length; i++) {
+
+            html += '<button class="button option" onclick="answerQuestion(' + i + ')">';
+
+            html += (i + 1) + '. ' + q.options[i];
+
+            html += '</button>';
+        }
+
+        html += '<button class="button back" onclick="chooseTest()">';
+
+        html += '⬅️ Выйти из теста';
+
+        html += '</button>';
+
+        html += '</div>';
+
+        app.innerHTML = html;
+    }
+
+    function answerQuestion(answer) {
+
+        var q = currentQuestions[currentQuestionIndex];
+
+        if (answer === q.answer) {
+
+            currentScore++;
+
+            alert("✅ Правильно!");
+
+        } else {
+alert(
+                "❌ Неправильно.\n\nПравильный ответ: " +
+                q.options[q.answer]
+            );
+        }
+
+        currentQuestionIndex++;
+
+        showQuestion();
+    }
+
+    function showTestResult() {
+
+        var percentage =
+            Math.round(
+                (currentScore / currentQuestions.length) * 100
+            );
+
+        progress[currentSubject] = percentage;
+
+        saveProgress();
+
+        var message = "";
+
+        if (percentage === 100) {
+
+            message = "🏆 Идеальный результат!";
+
+        } else if (percentage >= 80) {
+
+            message = "🔥 Отличный результат!";
+
+        } else if (percentage >= 60) {
+
+            message = "👍 Хороший результат!";
+
+        } else {
+
+            message = "📚 Нужно немного повторить тему.";
+        }
+
+        app.innerHTML = `
+            <div class="card">
+
+                <h2>🎉 Тест завершён!</h2>
+
+                <div class="score">
+                    ${percentage}%
+                </div>
+
+                <p style="text-align:center;">
+                    Правильных ответов:
+                    <b>${currentScore}</b>
+                    из
+                    <b>${currentQuestions.length}</b>
+                </p>
+
+                <p style="text-align:center; font-size:18px;">
+                    ${message}
+                </p>
+
+                <button class="button main-button" onclick="startTest('${currentSubject}')">
+                    🔄 Пройти ещё раз
+                </button>
+
+                <button class="button" onclick="chooseTest()">
+                    📝 Выбрать другой тест
+                </button>
+
+                <button class="button back" onclick="showHome()">
+                    🏠 Главное меню
+                </button>
+
+            </div>
+        `;
+    }
+
+    function showProgress() {
+
+        var python = progress["Python"];
+
+        var informatics = progress["Информатика"];
+
+        var math = progress["Математика"];
+
+        app.innerHTML = `
+            <div class="card">
+
+                <h2>📊 МОЙ ПРОГРЕСС</h2>
+
+                <div class="progress-box">
+
+                    <div class="progress-title">
+                        <span>🐍 Python</span>
+                        <span>${python}%</span>
+                    </div>
+
+                    <div class="progress-bg">
+                        <div
+                            class="progress-fill"
+                            style="width:${python}%">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="progress-box">
+
+                    <div class="progress-title">
+                        <span>💻 Информатика</span>
+                        <span>${informatics}%</span>
+                    </div>
+
+                    <div class="progress-bg">
+                        <div
+                            class="progress-fill"
+                            style="width:${informatics}%">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="progress-box">
+
+                    <div class="progress-title">
+                        <span>📐 Математика</span>
+                        <span>${math}%</span>
+                    </div>
+
+                    <div class="progress-bg">
+                        <div
+                            class="progress-fill"
+                            style="width:${math}%">
+                        </div>
+                    </div>
+
+                </div>
+
+                <button class="button back" onclick="showHome()">
+                    ⬅️ Назад
+                </button>
+
+            </div>
+        `;
+    }
+
+    function questionMode() {
+
+        app.innerHTML = `
+            <div class="card">
+
+                <h2>🤖 Режим вопросов</h2>
+
+                <p class="lesson">
+                    Этот раздел пока находится в разработке.
+                    В будущем здесь можно будет задавать
+                    EduAI вопросы по учебным предметам.
+                </p>
+
+                <p>
+                    🚀 Скоро здесь появится настоящий
+                    учебный ИИ-помощник!
+                </p>
+
+                <button class="button back" onclick="showHome()">
+                    ⬅️ Назад
+                </button>
+
+            </div>
+        `;
+    }
+
+    function exitApp() {
+
+        app.innerHTML = `
+            <div class="card" style="text-align:center;">
+
+                <div class="emoji">👋</div>
+
+                <h2>До встречи, ${userName}!</h2>
+
+                <p>
+                    Спасибо, что использовал EduAI.
+                </p>
+
+                <button class="button main-button" onclick="startApp()">
+                    🔄 Запустить снова
+                </button>
+
+            </div>
+        `;
+    }
+
+    startApp();
+
+</script>
+
+</body>
+</html>
+     
