@@ -1131,6 +1131,52 @@
         `;
         }
 
+var safeQuestion = question
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+
+            answerBox.innerHTML = `
+                <div class="card">
+
+                    <h3>🤖 EduAI получил вопрос!</h3>
+
+                    <p>Твой вопрос:</p>
+
+                    <p>
+                        <b>${safeQuestion}</b>
+                    </p>
+
+                    <p>
+    ${answer}
+</p>
+                </div>
+                `;
+        }
+
+        function exitApp() {
+
+            app.innerHTML = `
+            <div class="card" style="text-align:center;">
+
+                <div class="emoji">👋</div>
+
+                <h2>До встречи, ${userName}!</h2>
+
+                <p>
+                    Спасибо, что использовал EduAI.
+                </p>
+
+                <button class="button main-button" onclick="startApp()">
+                    🔄 Запустить снова
+                </button>
+
+            </div>
+        `;
+        }
+
         function showLogin() {
     app.innerHTML = 
         <div class="card">
@@ -1249,6 +1295,12 @@
     ;
 }
 
+    </script>
+
+</body>
+
+</html>
+        
     </script>
 
 </body>
