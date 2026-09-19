@@ -1211,7 +1211,42 @@
     ;
 }
 
-    startApp();
+    function showRegister() {
+    app.innerHTML = 
+        <div class="card">
+            <h2>📝 Создание аккаунта</h2>
+
+            <p class="small">
+                Создай аккаунт EduAI, чтобы сохранить свой прогресс.
+            </p>
+
+            <input
+                type="text"
+                id="registerName"
+                placeholder="👤 Твоё имя"
+            >
+
+            <input
+                type="email"
+                id="registerEmail"
+                placeholder="📧 Резервная почта"
+            >
+
+            <input
+                type="password"
+                id="registerPassword"
+                placeholder="🔑 Пароль"
+            >
+
+            <button onclick="registerUser()">
+                🚀 Создать аккаунт
+            </button>
+
+            <button onclick="showLogin()">
+                ⬅️ Назад ко входу
+            </button>
+        </div>
+    ;
 }
 
     </script>
