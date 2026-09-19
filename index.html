@@ -1131,6 +1131,36 @@
         `;
         }
 
+        function showLogin() {
+    app.innerHTML = 
+        <div class="card">
+            <h2>🔐 Вход в EduAI</h2>
+
+            <p class="small">
+                Войди в свой аккаунт, чтобы сохранить прогресс.
+            </p>
+
+            <input
+                type="text"
+                id="loginName"
+                placeholder="👤 Твоё имя"
+            >
+
+            <button onclick="loginUser()">
+                🚀 Войти
+            </button>
+
+            <button onclick="showRegister()">
+                📝 Создать аккаунт
+            </button>
+
+            <p class="small">
+                🔒 Твои учебные данные будут сохранены на этом устройстве.
+            </p>
+        </div>
+    ;
+}
+
         showLogin();
 
     </script>
