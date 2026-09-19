@@ -1163,6 +1163,19 @@
 
         showLogin();
 
+        function loginUser() {
+    const name = document.getElementById("loginName").value.trim();
+
+    if (!name) {
+        alert("⚠️ Введи своё имя!");
+        return;
+    }
+
+    localStorage.setItem("eduai_user", name);
+
+    startApp();
+}
+
     </script>
 
 </body>
