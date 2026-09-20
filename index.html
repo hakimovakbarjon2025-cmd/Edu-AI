@@ -1156,58 +1156,8 @@ var safeQuestion = question
                 `;
         }
 
-        function exitApp() {
-
-            app.innerHTML = `
-            <div class="card" style="text-align:center;">
-
-                <div class="emoji">👋</div>
-
-                <h2>До встречи, ${userName}!</h2>
-
-                <p>
-                    Спасибо, что использовал EduAI.
-                </p>
-
-                <button class="button main-button" onclick="startApp()">
-                    🔄 Запустить снова
-                </button>
-
-            </div>
-        `;
-        }
-
-        function showLogin() {
-    app.innerHTML = 
-        <div class="card">
-            <h2>🔐 Вход в EduAI</h2>
-
-            <p class="small">
-                Войди в свой аккаунт, чтобы сохранить прогресс.
-            </p>
-
-            <input
-                type="text"
-                id="loginName"
-                placeholder="👤 Твоё имя"
-            >
-
-            <button onclick="loginUser()">
-                🚀 Войти
-            </button>
-
-            <button onclick="showRegister()">
-                📝 Создать аккаунт
-            </button>
-
-            <p class="small">
-                🔒 Твои учебные данные будут сохранены на этом устройстве.
-            </p>
-        </div>
-    ;
-}
-
-        showLogin();
+       
+       
 
         function loginUser() {
     const name = document.getElementById("loginName").value.trim();
@@ -1218,6 +1168,8 @@ var safeQuestion = question
     }
 
     localStorage.setItem("eduai_user", name);
+
+            loginUser()
 
             function showRegister() {
     app.innerHTML = 
@@ -1257,45 +1209,39 @@ var safeQuestion = question
     ;
 }
 
-    function showRegister() {
-    app.innerHTML = 
+            showRegister()
+
+             function showLogin() {
+    app.innerHTML = ` 
         <div class="card">
-            <h2>📝 Создание аккаунта</h2>
+            <h2>🔐 Вход в EduAI</h2>
 
             <p class="small">
-                Создай аккаунт EduAI, чтобы сохранить свой прогресс.
+                Войди в свой аккаунт, чтобы сохранить прогресс.
             </p>
 
             <input
                 type="text"
-                id="registerName"
+                id="loginName"
                 placeholder="👤 Твоё имя"
             >
 
-            <input
-                type="email"
-                id="registerEmail"
-                placeholder="📧 Резервная почта"
-            >
-
-            <input
-                type="password"
-                id="registerPassword"
-                placeholder="🔑 Пароль"
-            >
-
-            <button onclick="registerUser()">
-                🚀 Создать аккаунт
+            <button onclick="loginUser()">
+                🚀 Войти
             </button>
 
-            <button onclick="showLogin()">
-                ⬅️ Назад ко входу
+            <button onclick="showRegister()">
+                📝 Создать аккаунт
             </button>
+
+            <p class="small">
+                🔒 Твои учебные данные будут сохранены на этом устройстве.
+            </p>
         </div>
-    ;
+    `;
 }
-            
-            showLogin()
+
+        showLogin();
 
     </script>
 
